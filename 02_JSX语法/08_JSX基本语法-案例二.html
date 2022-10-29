@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script src="../lib/react.js"></script>
+		<script src="../lib/react-dom.js"></script>
+		<script src="../lib/babel.js"></script>
+		<script type="text/babel">
+			class App extends React.Component {
+				constructor() {
+					super()
+					this.state = {
+						message: '我是内容',
+						isShow: true
+					}
+				}
+
+				btnClick() {
+					this.setState({ isShow: !this.state.isShow })
+				}
+
+				render() {
+					const { isShow, message } = this.state
+
+					const showEl = isShow ? <h2>{message}</h2> : undefined
+					const showEl2 = isShow && <h2 style={{ display: isShow ? 'block' : 'none' }}>{message}</h2>
+
+					return (
+						<div>
+							{/* v-if实现效果 */}
+							<button onClick={() => this.btnClick()}>{isShow ? '隐藏' : '显示'}</button>
+							<div>{showEl}</div>
+
+							{/* v-show实现效果 */}
+							<div>{showEl2}</div>
+						</div>
+					)
+				}
+			}
+
+			const root = ReactDOM.createRoot(document.querySelector('#root'))
+			root.render(<App />)
+		</script>
+	</body>
+</html>

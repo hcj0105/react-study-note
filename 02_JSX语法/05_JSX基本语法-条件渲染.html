@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script src="../lib/react.js"></script>
+		<script src="../lib/react-dom.js"></script>
+		<script src="../lib/babel.js"></script>
+		<script type="text/babel">
+			class App extends React.Component {
+				constructor() {
+					super()
+					this.state = {
+						isShow: true
+					}
+				}
+
+				render() {
+					const { isShow } = this.state
+
+					// 方式一: if条件判断
+					let showEl = null
+					if (isShow) {
+						showEl = <h2>准备好了</h2>
+					} else {
+						showEl = <h2>快点准备</h2>
+					}
+
+					return (
+						<div>
+							{/* 方式一: if条件判断 */}
+							<div>{showEl}</div>
+							{/* 方式二: 三元运算符 */}
+							<div>{isShow ? <h2>准备好了</h2> : <h2>快点准备</h2>}</div>
+							{/* 方式二: &&逻辑与 */}
+							<div>{isShow && <h2>准备好了</h2>}</div>
+						</div>
+					)
+				}
+			}
+
+			const root = ReactDOM.createRoot(document.querySelector('#root'))
+			root.render(<App />)
+		</script>
+	</body>
+</html>

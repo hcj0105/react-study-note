@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script src="../lib/react.js"></script>
+		<script src="../lib/react-dom.js"></script>
+		<script src="../lib/babel.js"></script>
+		<script type="text/babel">
+			class App extends React.Component {
+				constructor() {
+					super()
+					this.state = {
+						message: 'Hello World',
+						counter: 100
+					}
+
+					this.decerement = this.decerement.bind(this)
+					this.incerement = this.incerement.bind(this)
+				}
+
+				render() {
+					const { counter } = this.state
+
+					return (
+						<div>
+							<h2>当前计数: {counter}</h2>
+							<button onClick={this.incerement}>+1</button>
+							<button onClick={this.decerement}>-1</button>
+						</div>
+					)
+				}
+
+				// 加一
+				incerement() {
+					this.setState({
+						counter: this.state.counter + 1
+					})
+				}
+
+				// 减一
+				decerement() {
+					this.setState({
+						counter: this.state.counter - 1
+					})
+				}
+			}
+
+			const root = ReactDOM.createRoot(document.querySelector('#root'))
+			root.render(<App />)
+		</script>
+	</body>
+</html>

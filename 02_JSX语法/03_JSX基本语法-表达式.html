@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script src="../lib/react.js"></script>
+		<script src="../lib/react-dom.js"></script>
+		<script src="../lib/babel.js"></script>
+		<script type="text/babel">
+			class App extends React.Component {
+				constructor() {
+					super()
+					this.state = {
+						movies: ['海贼王', '火影忍者', '樱花庄的宠物女孩'],
+						age: 20
+					}
+				}
+
+				render() {
+					const { movies, age } = this.state
+
+					return (
+						<div>
+							{/* 三元表达式 */}
+							<h2>{age > 18 ? '成年人' : '未成年'}</h2>
+							
+							{/* 高阶函数返回数组 */}
+							<ul>
+								{ movies.map(movie => <li>{movie}</li>) }
+							</ul>
+
+							{/* 调用函数 */}
+							<ul>
+								{this.createLis()}
+							</ul>
+						</div>
+					)
+				}
+
+				createLis(params) {
+					return this.state.movies.map(movie => <li>{movie}</li>)
+				} 
+
+			}
+
+			const root = ReactDOM.createRoot(document.querySelector('#root'))
+			root.render(<App />)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			table {
+				border-collapse: collapse;
+				text-align: center;
+			}
+
+			th,
+			td {
+				padding: 8px 16px;
+				border: 1px solid #aaa;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script src="../lib/react.js"></script>
+		<script src="../lib/react-dom.js"></script>
+		<script src="../lib/babel.js"></script>
+		<script src="./data.js"></script>
+		<script src="./format.js"></script>
+
+		<script type="text/babel">
+			class App extends React.Component {
+				constructor() {
+					super()
+					this.state = {
+						books: books
+					}
+				}
+
+				onInercement(index) {
+					const newBooks = [...this.state.books]
+					newBooks[index].count += 1
+					this.setState({ books: newBooks })
+				}
+
+				onDecrement(index) {
+					const newBooks = [...this.state.books]
+					newBooks[index].count -= 1
+					this.setState({ books: newBooks })
+				}
+
+				changCount(index, count) {
+					const newBooks = [...this.state.books]
+					newBooks[index].count += count
+					this.setState({ books: newBooks })
+				}
+
+				onDelete(index) {
+					const books = this.state.books
+					books.splice(index, 1)
+					this.setState({ books })
+				}
+
+				render() {
+					const { books } = this.state
+
+					const totalPrice =
+						books.length > 0
+							? books.reduce(
+									(preValue, book) => (preValue += book.price * book.count),
+									0
+							  )
+							: 0
+
+					return (
+						<div>
+							<table>
+								<Thead />
+								<Tbody books={books} changCount={this.changCount.bind(this)} />
+							</table>
+							<p>总价格: {formatPrice(totalPrice)}</p>
+						</div>
+					)
+				}
+			}
+
+			class Thead extends React.Component {
+				constructor() {
+					super()
+				}
+
+				render() {
+					return (
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>书籍名称</th>
+								<th>出版日期</th>
+								<th>价格</th>
+								<th>购买数量</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+					)
+				}
+			}
+
+			class Tbody extends React.Component {
+				constructor() {
+					super()
+				}
+
+				render() {
+					const { books } = this.props
+					const { changCount, onDelete } = this.props
+
+					return (
+						<tbody>
+							{books.map((book, index) => {
+								return (
+									<tr key={book.id}>
+										<td>{index + 1}</td>
+										<td>{book.name}</td>
+										<td>{book.date}</td>
+										<td>{formatPrice(book.price)}</td>
+										<td>
+											<button
+												disabled={book.count <= 1}
+												onClick={() => changCount(index, -1)}>
+												-
+											</button>
+											{book.count}
+											<button onClick={() => changCount(index, 1)}>+</button>
+										</td>
+										<td>
+											<button onClick={() => onDelete(index)}>移除</button>
+										</td>
+									</tr>
+								)
+							})}
+						</tbody>
+					)
+				}
+			}
+
+			const root = ReactDOM.createRoot(document.querySelector('#root'))
+			root.render(<App />)
+		</script>
+	</body>
+</html>

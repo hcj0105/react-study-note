@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script src="../lib/react.js"></script>
+		<script src="../lib/react-dom.js"></script>
+		<script src="../lib/babel.js"></script>
+		<script type="text/babel">
+			class App extends React.Component {
+				constructor() {
+					super()
+					this.state = {
+						message: 'Hello React',
+						counter: 100,
+						names: ['name1', 'name2', 'name3'],
+
+            un: undefined,
+            nu: null,
+            isB: true,
+
+						obj: { name: 'y_mixin_o' }
+					}
+				}
+
+				render() {
+          // 基础类型
+					const { message, counter, names } = this.state
+					const { un, nu, isB } = this.state
+          
+
+					return (
+            <div>
+              {/* 基本数据绑定: String、Number、Array */}
+              <h2>{message}</h2>  
+              <h2>{counter}</h2>  
+              <h2>{names}</h2>  
+
+              {/* 基本数据绑定: undefined、null、Boolean 默认这些值不会显示 */}
+              <h2>{un}</h2>  
+              <h2>{nu}</h2>  
+              <h2>{isB}</h2>  
+              {/* 基本数据绑定: undefined、null、Boolean 需要展示需要转成字符串类型 */}
+              <h2>{un + ''}</h2>  
+              <h2>{String(nu)}</h2>  
+              <h2>{isB.toString()}</h2>
+
+							{/* 基本数据绑定: {}中能接收对象类型 Error */}
+							{/* <h2>{obj}</h2> */}
+            </div>
+          )
+				}
+			}
+
+			const root = ReactDOM.createRoot(document.querySelector('#root'))
+			root.render(<App />)
+		</script>
+	</body>
+</html>

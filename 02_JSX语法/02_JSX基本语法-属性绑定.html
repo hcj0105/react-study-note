@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script src="../lib/react.js"></script>
+		<script src="../lib/react-dom.js"></script>
+		<script src="../lib/babel.js"></script>
+		<script type="text/babel">
+			class App extends React.Component {
+				constructor() {
+					super()
+					this.state = {
+						isActive: true
+					}
+				}
+
+				render() {
+					const { isActive } = this.state
+
+					const classNames = ['abc', 'cba']
+					if (isActive) classNames.push('active')
+
+					return (
+						<div>
+							{/* 绑定class一: 字符串 */}
+							<h2 clasName='abc active'></h2>
+							{/* 绑定class二: 字符串拼接 */}
+							<h2 clasName={classNames}></h2>
+							{/* 绑定class三: 模板字符串 */}
+							<h2 clasName={`abc cba ${isActive ? 'active' : ''}`}></h2>
+
+							{/* 绑定style */}
+							<h2 style={{ color: 'red' }}>哈哈哈哈哈</h2>
+						</div>
+					)
+				}
+			}
+
+			const root = ReactDOM.createRoot(document.querySelector('#root'))
+			root.render(<App />)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script src="../lib/react.js"></script>
+		<script src="../lib/react-dom.js"></script>
+		<script src="../lib/babel.js"></script>
+		<script type="text/babel">
+			class App extends React.Component {
+				constructor() {
+					super()
+					this.state = {
+						message: 'Hello World'
+					}
+				}
+
+				btnClick(event, name, age) {
+					console.log('this', this)
+          console.log(name, age, event) // bind方式传递参数
+          console.log(event, name, age)
+				}
+
+				render() {
+					const { message } = this.state
+
+					return (
+						<div>
+              <h2>事件绑定方式:</h2>
+              {/* 方式一: 使用bind绑定this，显示绑定 */}
+							<button onClick={this.btnClick.bind(this)}>按钮1</button>
+              {/* 方式二: 方法定义的时候使用箭头函数，箭头函数this绑定规则 */}
+							<button onClick={this.btnClick}>按钮2</button>
+              {/* 方式三: 使用箭头函数，在箭头函数中调用方法， 隐式绑定 (推荐) */}
+							<button onClick={() => this.btnClick()}>按钮3</button>
+
+
+
+              <h2>事件参数event:</h2>
+              {/* bind方式传递参数:  他会默认回调方法时内部传入 */}
+              <button onClick={this.btnClick.bind(this)}>按钮1</button>
+              {/* 方式三: 调用时将接收的event参数传递给执行的函数 */}
+							<button onClick={(event) => this.btnClick(event)}>按钮2</button>
+
+              
+              <h2>事件传递其他参数:</h2>
+              {/* bind方式传递参数: 他会默认把event参数放在最后一个参数中  */}
+              <button onClick={this.btnClick.bind(this, 'y_mixin_o', 21)}>按钮1</button>
+              {/* 方式三: 使用箭头函数，在箭头函数中调用方法时直接传入(推荐) */}
+							<button onClick={(event) => this.btnClick(event, 'y_mixin_o', 21)}>按钮3</button>
+						</div>
+					)
+				}
+			}
+
+			const root = ReactDOM.createRoot(document.querySelector('#root'))
+			root.render(<App />)
+		</script>
+	</body>
+</html>

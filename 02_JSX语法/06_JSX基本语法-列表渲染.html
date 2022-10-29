@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script src="../lib/react.js"></script>
+    <script src="../lib/react-dom.js"></script>
+    <script src="../lib/babel.js"></script>
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super()
+          this.state = {
+            students: [
+              { id: 121, name: 'studnet1', score: 102 },
+              { id: 122, name: 'studnet2', score: 98 },
+              { id: 123, name: 'studnet3', score: 198 },
+              { id: 124, name: 'studnet4', score: 200 },
+            ]
+          }
+        }
+
+        render() {
+          const { students } = this.state
+          // 展示学生分数大于100，并且就展示2条数据
+          return (
+            <div>
+              <div className="list">
+                {
+                  students.filter(item => item.score > 100).slice(0, 2).map(student => {
+                    return (
+                      <div className="item">
+                        <h2>学号：{student.id}</h2>
+                        <h2>姓名：{student.name}</h2>
+                        <h2>分数：{student.score}</h2>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+            </div>
+          )
+        }
+      }
+
+      const root = ReactDOM.createRoot(document.querySelector('#root'))
+      root.render(<App />)
+    </script>
+  </body>
+</html>

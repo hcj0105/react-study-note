@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			.avtive {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="root"></div>
+
+		<script src="../lib/react.js"></script>
+		<script src="../lib/react-dom.js"></script>
+		<script src="../lib/babel.js"></script>
+		<script type="text/babel">
+			class App extends React.Component {
+			  constructor() {
+			    super()
+			    this.state = {
+			      movies: ['火影忍者', '海贼王', '樱花庄的宠物女孩', '未闻花名'],
+			      currentIndex: 0
+			    }
+			  }
+
+
+        // 点击li时触发事件
+        liSelectedClick(index) {
+          // 更改当前的index
+          this.setState({ currentIndex: index }) 
+        }
+
+			  render() {
+			    const { movies, currentIndex } = this.state
+
+			    return (
+			      <div>
+			        <ul>
+			          {
+			            movies.map((movie, index) => {
+			              return (
+			                <li
+			                  className={currentIndex == index ? 'avtive' : ''}
+                        onClick={() => this.liSelectedClick(index)}
+			                >
+                      {movie}
+			                </li>
+			              )
+			            })
+			          }
+			        </ul>
+			      </div>
+			    )
+			  }
+			}
+
+			const root = ReactDOM.createRoot(document.querySelector('#root'))
+			root.render(<App />)
+		</script>
+	</body>
+</html>
