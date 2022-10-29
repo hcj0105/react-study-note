@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+.tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.tab .item {
+  flex: 1;
+}
+
+.tab .item.active {
+  color: red;
+}
+
+.tab .item.active span {
+  border-bottom: 3px solid red;
+}
