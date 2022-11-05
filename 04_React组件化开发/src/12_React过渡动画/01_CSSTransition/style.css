@@ -1,0 +1,29 @@
+/* in 默认为 true 时，首次动画 */
+.content-appear {
+  opacity: 0;
+}
+
+.content-appear-active {
+  opacity: 1;
+  transition: opacity 2s ease;
+}
+
+/* 进入动画 */
+.content-enter {
+  opacity: 0;
+}
+
+.content-enter-active {
+  opacity: 1;
+  transition: opacity 2s ease;
+}
+
+/* 离开动画 */
+.content-exit {
+  opacity: 1;
+}
+
+.content-exit-active {
+  opacity: 0;
+  transition: opacity 2s ease;
+}

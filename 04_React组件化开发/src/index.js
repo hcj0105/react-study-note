@@ -10,8 +10,10 @@ import ReactDOM from 'react-dom/client'
 // import App from './08_数据不可变的力量/App'
 // import App from './09_获取DOM和组件/App'
 // import App from './10_受控组和非受控组件/App'
-
-import App from './11_React高阶组件/App'
+// import App from './11_React高阶组件/App'
+// import App from './12_React过渡动画/01_CSSTransition/App'
+// import App from './12_React过渡动画/02_SwitchTransition/App'
+import App from './12_React过渡动画/03_TransitionGroup/App'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
